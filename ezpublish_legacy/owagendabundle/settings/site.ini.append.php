@@ -6,4 +6,7 @@ TranslationExtensions[]=owagendabundle
 [AgendaSettings]
 RootFolderNodeId=498
 
+[MigrationSettings]
+MigrationExtensions[]=owagendabundle
+
 */ ?>
