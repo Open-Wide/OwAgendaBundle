@@ -24,16 +24,22 @@ class EventFolderViewController extends ViewController
 
         $content = $contentService->loadContentByContentInfo( $location->getContentInfo() );
 
+        $event_list = $this->getLegacyContentService()->fetchNodeList( array(
+            'ParentNodeId' => $location->id,
+            'ContentTypeIdentifier' => 'event_liste'
+        ) );       
+
+        $listeNodeId = null;
+        if(is_array($event_list) && count($event_list)>0){
+            $listeNodeId = $event_list[0]->MainNodeID;
+        }
+       
         $params = array(
             'location' => $location,
             'content' => $content,
-            'type' => ($viewType=='full'?'normal':'mini')
+            'type' => ($viewType=='full'?'normal':'mini'),
+            'listeNodeId' => $listeNodeId
         );
-
-        $event_dateList = $this->getLegacyContentService()->fetchNodeList( array(
-            'ParentNodeId' => $location->id,
-            'ContentTypeIdentifier' => 'event_date'
-        ) );
 
         return $params;
     }
