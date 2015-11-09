@@ -4,6 +4,7 @@
 $(document).ready(function() {
 
     var hostname = window.location.hostname;
+    var protocol = (window.location.protocol != "https:") ? "http:" : "https:";
     var locationId = $('#locationId').val();
 
     $('#calendar').fullCalendar({
@@ -15,14 +16,14 @@ $(document).ready(function() {
         },
         defaultView: 'month',
         eventLimit: true, // allow "more" link when too many events
-        events: 'http://'  + hostname + '/agenda/list/events.json?locationId='+locationId,
+        events: protocol + '//'  + hostname + '/agenda/list/events.json?locationId='+locationId,
         eventRender: function(event, element) {
             element.tooltip({
                 "title": truncateString( event.description ),
                 "html": true,
                 "placement": 'auto'
             });
-        },
+        }
 
     });
 
@@ -36,13 +37,13 @@ $(document).ready(function() {
         timeFormat: 'H:mm',
         handleWindowResize: true,
         eventLimit: true, // allow "more" link when too many events
-        events: 'http://'  + hostname + '/agenda/list/events.json?locationId='+locationId,
+        events: protocol + '//'  + hostname + '/agenda/list/events.json?locationId='+locationId,
         // add event name to title attribute on mouseover
         eventMouseover: function(event, jsEvent, view) {
             if (view.name !== 'agendaDay') {
                 $(jsEvent.target).attr('title', event.title);
             }
-        },
+        }
         /*eventClick: function(event) {
             if (event.url) {
                 window.open(event.url);
